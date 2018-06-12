@@ -1,0 +1,65 @@
+<!--<div class="animated fadeIn">
+    <div class="card card-accent-danger my-editcard">
+        <div class="card-header">
+            <span class="title">{{title}}</span>
+        </div>
+        <div class="card-body">
+            <form id="editUser" name="form" #f="ngForm" novalidate (keydown.enter)="$event.preventDefault()" autocomplete="false">
+                <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>{{getLocalization('label_firstname')}}:</label>
+                            <input autofocus type="text" class="form-control" name="firstname" [disabled]="isDisabled" [(ngModel)]="user.firstName" #name="ngModel" (change)="onInputChange($event)" />
+                            <div class="help-block text-danger errorMessage"></div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>{{getLocalization('label_lastname')}}:</label>
+                            <input type="text" class="form-control" name="lastname" [disabled]="isDisabled" [(ngModel)]="user.lastName" #lastName="ngModel" (change)="onInputChange($event)" />
+                            <div class="help-block text-danger errorMessage"></div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>{{getLocalization('label_email')}}:</label>
+                            <input type="text" class="form-control" name="email" [disabled]="isDisabled" [(ngModel)]="user.email" #email="ngModel" (change)="onInputChange($event)" />
+                            <div class="help-block text-danger errorMessage"></div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>{{getLocalization('label_username')}}:</label>
+                            <input type="text" class="form-control" name="username" [disabled]="isDisabled" [(ngModel)]="user.username" #username="ngModel" (change)="onInputChange($event)" />
+                            <div class="help-block text-danger errorMessage"></div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>{{getLocalization('label_password')}}:</label>
+                            <input type="password" class="form-control" name="password" [disabled]="isDisabled" [(ngModel)]="user.password" #password="ngModel" (change)="onInputChange($event)" autocomplete="new-password" />
+                            <div class="help-block text-danger errorMessage"></div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>{{getLocalization('label_roles')}}:</label>
+                            <angular2-multiselect #userRole name="roles" [isDisabled]="isDisabled" [(ngModel)]="selectedItems" [settings]="listSettings(isDisabled, true)" (onSelect)="selectedRole($event)" (onDeSelect)="removedRole($event)" [selectedItems]="selectedItems" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
+                            </angular2-multiselect>
+                            <div class="help-block text-danger errorMessage"></div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <div class="checkbox checkbox-info">
+                                <input id="checkbox4" type="checkbox" name="active" [disabled]="isDisabled" [(ngModel)]="user.active" #name="ngModel" class="js-switch" data-color="#009efb">
+                                <label for="checkbox4">{{getLocalization('label_active')}}</label>
+                            </div>
+                        </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12 divErrorMessage" hidden>
+                        <div class="alert">
+                            <span class="errorText"></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer text-right">
+            <a class="btn btn-secondary" [routerLink]="['/administration/user']"><i class="fa fa-times"></i> {{getLocalization('btn_back')}}</a>
+            <button class="btn btn-success pointer" [hidden]="isDisabled" (click)="submit()"><i class="fa fa-check"></i> {{getLocalization('btn_confirm')}}</button>
+        </div>
+    </div>
+</div>-->
+
+
+edit komponenta
