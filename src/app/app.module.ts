@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpModule } from '@angular/http';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { DeleteModalModule } from './common/modals/deleteModal/deleteModal.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    DeleteModalModule
   ],
   providers: [
     CustomersListService

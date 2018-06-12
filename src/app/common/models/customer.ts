@@ -1,7 +1,6 @@
 
 
 export class Customer {
-
     customerID: number;
     name: Name;
     birthday: string;
