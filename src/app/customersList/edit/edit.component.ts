@@ -14,7 +14,7 @@ export class EditComponent  implements OnInit {
 
     constructor(private _customersListService: CustomersListService) {
         this.title = 'Edit';
-        
+
         _customersListService.getCustomers().toPromise()
             .then((customers: Customer[]) => {
                 this.customers = customers;
@@ -31,8 +31,6 @@ export class EditComponent  implements OnInit {
             .catch(err => {
                 console.log(err);
             });
-
-       
 
 
         // this.user.userId = this.activeRouter.snapshot.params['id'];
