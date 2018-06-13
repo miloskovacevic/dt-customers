@@ -80,15 +80,19 @@ export class EditComponent  implements OnInit, OnDestroy {
     }
 
     saveCustomer(customer: Customer) {
-        let data: Customer[] = SessionCacheHelper.getGridData('customers');
-        let cust = data.filter((c) => c.customerID == customer.customerID)[0];
+        const data: Customer[] = SessionCacheHelper.getGridData('customers');
 
         if (customer.customerID == 0) {
             customer.customerID = data.length + 1;
             data.push(customer);
-            SessionCacheHelper.setGridData('customers', data);
-            this.router.navigate(['/customersList']);
+        } else {
+            // edit
+            const index = data.findIndex(x => x.customerID == customer.customerID);
+            data[index] = customer;
         }
+
+        SessionCacheHelper.setGridData('customers', data);
+        this.router.navigate(['/customersList']);
     }
 
     getCustomer(customerId: Number) {
