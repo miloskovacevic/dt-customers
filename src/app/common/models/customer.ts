@@ -3,9 +3,9 @@
 export class Customer {
     customerID: number;
     name: Name;
-    birthday: Date;
+    birthday: any;
     gender: string;
-    lastContact: Date;
+    lastContact: any;
     customerLifetimeValue: Number;
 
     constructor () {

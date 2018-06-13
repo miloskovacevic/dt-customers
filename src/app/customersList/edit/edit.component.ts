@@ -1,8 +1,9 @@
+import { SessionCacheHelper } from './../../common/helpers/sessionCacheHelper';
 import { actionEnum } from './../../common/enums/actionEnum';
 import { Customer } from './../../common/models/customer';
 import { CustomersListService } from './../../services/customersList.service';
 import { Component, ViewChild, OnInit, Injector, HostListener, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
 import { FormControl } from '@angular/forms';
 
@@ -25,9 +26,9 @@ export class EditComponent  implements OnInit, OnDestroy {
     customers: Customer[];
     activeRouter: ActivatedRoute;
 
-    constructor(private injector: Injector, private _customersListService: CustomersListService) {
+    constructor(private injector: Injector, private _customersListService: CustomersListService, private router:Router) {
         this.customer = new Customer();
-        
+
         // this._ngxDefaultTimeout = setTimeout(() => {
         //     this._ngxDefaultInterval = setInterval(() => {
         //         const idx = Math.floor(Math.random() * (this.items.length - 1));
@@ -41,20 +42,17 @@ export class EditComponent  implements OnInit, OnDestroy {
         this.title = 'Edit';
 
         this.customer.customerID = this.activeRouter.snapshot.params['id'];
+
         if (this.customer.customerID == null) {
             this.title = 'Add customer';
             this.customer.customerID = 0;
         } else {
-            _customersListService.getCustomer(this.customer.customerID)
-                .then((customer: Customer) => {
-                    this.customer = customer;
-                    this.customer.birthday = new Date(this.customer.birthday);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            this.customer = (<Customer[]>SessionCacheHelper.getGridData('customers')).find(c => c.customerID == this.customer.customerID);
+            // setting up right format for date picker...
+            this.customer.birthday = new Date(this.customer.birthday);
+            this.customer.lastContact = new Date(this.customer.lastContact);
 
-                this.title = 'Edit customer';
+            this.title = 'Edit customer';
         }
     }
 
@@ -68,9 +66,29 @@ export class EditComponent  implements OnInit, OnDestroy {
     }
 
     submit() {
-        // this.customer.birthday = this.customer.birthday.toISOString();
+        if (this.customer.birthday instanceof Date) {
+            this.customer.birthday = this.customer.birthday.toISOString();
+        }
+        if (this.customer.lastContact instanceof Date) {
+            this.customer.lastContact = this.customer.lastContact.toISOString();
+        }
+        this.customer.gender = this.ngxControl.value;
 
-        console.log('snimio!');
+        // ovde dohvatim iz session cache helpera podatke zamjenim ih i snimim...
+        this.saveCustomer(this.customer);
+        console.log(this.customer);
+    }
+
+    saveCustomer(customer: Customer) {
+        let data: Customer[] = SessionCacheHelper.getGridData('customers');
+        let cust = data.filter((c) => c.customerID == customer.customerID)[0];
+
+        if (customer.customerID == 0) {
+            customer.customerID = data.length + 1;
+            data.push(customer);
+            SessionCacheHelper.setGridData('customers', data);
+            this.router.navigate(['/customersList']);
+        }
     }
 
     getCustomer(customerId: Number) {

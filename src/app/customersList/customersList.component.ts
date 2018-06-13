@@ -1,3 +1,4 @@
+import { SessionCacheHelper } from './../common/helpers/sessionCacheHelper';
 import { CustomersListService } from './../services/customersList.service';
 import { Customer } from './../common/models/customer';
 import { Component, OnInit, HostListener, AfterContentInit, ViewChild, TemplateRef } from '@angular/core';
@@ -46,19 +47,25 @@ export class CustomersListComponent implements OnInit, AfterContentInit {
     }
 
     getData() {
-        this._customersListService.getCustomers().toPromise()
-        .then((customers: Customer[]) => {
-            this.data = customers;
+        console.log('trazim podatke...');
+        if (!SessionCacheHelper.getGridData('customers')) {
+            this._customersListService.getCustomers().toPromise()
+            .then((customers: Customer[]) => {
+                this.data = customers;
+                this.rows = this.data;
+                SessionCacheHelper.setGridData('customers', this.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        } else {
+            this.data = SessionCacheHelper.getGridData('customers');
             this.rows = this.data;
-            console.log(this.data);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+        }
     }
 
     onRouteClick() {
-        
+
     }
 
     deleteResource(userId: number) {

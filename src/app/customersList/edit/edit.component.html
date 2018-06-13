@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6" style="border: 1px solid #5cb85c; padding: 1%;"> 
+                            <div class="col-md-6" style="border: 1px solid #5cb85c; padding: 1%;">
                                 <div style="margin-bottom: 2%;">
                                     Application data 
                                 </div>
@@ -86,12 +86,12 @@
                                     </div>
                                     <div class="col-md-6">  
                                        <div class="form-group" style="height: 45px">
-                                            <label>Birthday:</label>
+                                            <label>Last Contact:</label>
                                             <div class="input-group">
-                                                <input type="text" name="effectiveDate" class="form-control" bsDatepicker #dpEf="bsDatepicker" [disabled]="isDisabled" [(bsValue)]="customer.birthday"
+                                                <input type="text" name="effectiveDate" class="form-control" bsDatepicker #dpEf2="bsDatepicker" [disabled]="isDisabled" [(bsValue)]="customer.lastContact"
                                                     [bsConfig]="bsConfig">
                                                 <div class="input-group-btn">
-                                                    <button class="btn btn-success" (click)="dpEf.show() "><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i> Open</button>
+                                                    <button class="btn btn-success" (click)="dpEf2.show() "><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i> Open</button>
                                                 </div>
                                             </div>
                                             <div class="help-block text-danger errorMessage"></div>
