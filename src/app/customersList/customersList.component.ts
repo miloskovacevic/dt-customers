@@ -57,6 +57,10 @@ export class CustomersListComponent implements OnInit, AfterContentInit {
         });
     }
 
+    onRouteClick() {
+        
+    }
+
     deleteResource(userId: number) {
         this.deleteModal.show(() => {
             this.deleteModal.loader.show();

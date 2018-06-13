@@ -6,19 +6,12 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class CustomersListService {
     constructor(private http: HttpClient) {
-        // this.getCustomers().toPromise()
-        //     .then((data) => {
-        //         console.log(data);
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //     });
     }
 
-    getCustomer(customerId: number) {
+    getCustomer(customerId: Number) {
         return this.http.get('./assets/customers-sample.json').toPromise()
                 .then((customers: Customer[]) => {
-                    let customer = customers.filter(c => c.customerID === customerId)[0];
+                    let customer = customers.filter(c => c.customerID == customerId)[0];
                     return customer;
                 })
                 .catch((err) => {
