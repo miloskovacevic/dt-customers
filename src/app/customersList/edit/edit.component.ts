@@ -83,7 +83,12 @@ export class EditComponent  implements OnInit, OnDestroy {
         const data: Customer[] = SessionCacheHelper.getGridData('customers');
 
         if (customer.customerID == 0) {
-            customer.customerID = data.length + 1;
+            if (data[data.length - 1]) {
+                customer.customerID = data[data.length - 1].customerID + 1;
+            } else {
+                customer.customerID = 1;
+            }
+            
             data.push(customer);
         } else {
             // edit
@@ -94,6 +99,8 @@ export class EditComponent  implements OnInit, OnDestroy {
         SessionCacheHelper.setGridData('customers', data);
         this.router.navigate(['/customersList']);
     }
+
+   
 
     getCustomer(customerId: Number) {
 

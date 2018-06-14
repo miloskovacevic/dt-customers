@@ -1,9 +1,9 @@
 export class SessionCacheHelper {
 
     static setGridData(name: String, data: any) {
-        localStorage.setItem(name + '.GridData', JSON.stringify(data));
+        sessionStorage.setItem(name + '.GridData', JSON.stringify(data));
     }
     static getGridData(name: String) {
-        return JSON.parse(localStorage.getItem(name + '.GridData'));
+        return JSON.parse(sessionStorage.getItem(name + '.GridData'));
     }
 }

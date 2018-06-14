@@ -68,27 +68,31 @@ export class CustomersListComponent implements OnInit, AfterContentInit {
 
     }
 
-    deleteResource(userId: number) {
-        this.deleteModal.show(() => {
-            this.deleteModal.loader.show();
-            setTimeout(() => {
-                console.log('nesto izbrisano!!');
-            }, 2000);
+    deleteResource(customerID: number) {
+        const data: Customer[] = SessionCacheHelper.getGridData('customers');
+        // confirm('Da li zelite da izbrisete customera? ');
+        const index = data.indexOf(data.find(d => d.customerID == customerID));
+        data.splice(index, 1);
+        SessionCacheHelper.setGridData('customers', data);
+        this.rows = data;
 
-            // this._userService.deleteUser(userId)
-            //     .then((data) => {
-            //         //SessionCacheHelper.setGridData('users', null);
-            //         this.getData(true);
-            //         //SessionCacheHelper.getCacheData('users', this.table, this.filter);
-            //         this.deleteModal.loader.hide();
-            //         this.deleteModal.hide();
-            //         //this.showPopupMessage(data);
-            //     })
-            //     .catch((err) => {
-            //         // this.showPopupMessage(err);
-            //         // this.deleteModal.loader.hide();
-            //         // this.deleteModal.hide();
-            //     });
-        });
+        // this.deleteModal.show(() => {
+        //     // this.deleteModal.loader.show();
+        
+        //     // this._userService.deleteUser(userId)
+        //     //     .then((data) => {
+        //     //         //SessionCacheHelper.setGridData('users', null);
+        //     //         this.getData(true);
+        //     //         //SessionCacheHelper.getCacheData('users', this.table, this.filter);
+        //     //         this.deleteModal.loader.hide();
+        //     //         this.deleteModal.hide();
+        //     //         //this.showPopupMessage(data);
+        //     //     })
+        //     //     .catch((err) => {
+        //     //         // this.showPopupMessage(err);
+        //     //         // this.deleteModal.loader.hide();
+        //     //         // this.deleteModal.hide();
+        //     //     });
+        // });
     }
 }
