@@ -4,7 +4,7 @@
 module.exports = function (config) {
   config.set({
     autoWatch: false,
-    browsers: ['ChromeHeadless'],
+    browsers: ['Chrome', 'ChromeHeadless', 'ChromeHeadlessNoSandbox'],
      // you can define custom flags
      customLaunchers: {
       ChromeHeadlessNoSandbox: {
